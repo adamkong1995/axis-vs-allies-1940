@@ -33,8 +33,8 @@ fs.writeFileSync(
 
 const Styled${componentName} = styled.div<I${componentName}>\`\`;
 
-const ${componentName} = ({}: I${componentName}) => {
-  return <Styled${componentName}></Styled${componentName}>;
+const ${componentName} = ({children}: I${componentName}) => {
+  return <Styled${componentName}>{children}</Styled${componentName}>;
 }
 
 export default ${componentName};
@@ -47,12 +47,14 @@ const TypeFilePath = path.join(targetDirectory, `Type.${fileExtension}`);
 fs.writeFileSync(
   TypeFilePath,
   `
-export interface I${componentName} {}
+export interface I${componentName} {
+  children?: React.ReactNode;
+}
 `.trim()
 );
 
 // Create the story file inside the folder
-const StoryFilePath = path.join(targetDirectory, `${componentName}.story.ts`);
+const StoryFilePath = path.join(targetDirectory, `${componentName}.stories.ts`);
 fs.writeFileSync(
   StoryFilePath,
   `
@@ -75,6 +77,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
+  args: {
+    children: "test",
+  },
 };
 `.trim()
 );
@@ -85,7 +90,10 @@ const IndexFilePath = path.join(targetDirectory, "index.ts");
 fs.writeFileSync(
   IndexFilePath,
   `
-export * from "./${componentName}";
-export * from "./Type";
+import ${componentName} from "./${componentName}";
+import { I${componentName} } from "./Type";
+  
+export default ${componentName};
+export type { I${componentName} };
 `.trim()
 );

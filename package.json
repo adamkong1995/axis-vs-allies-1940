@@ -9,7 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "createComponent": "node scripts/createComponent.js"
+    "createComponent": "node scripts/createComponents.tsx"
   },
   "dependencies": {
     "next": "14.0.2",
