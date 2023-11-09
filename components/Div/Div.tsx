@@ -5,14 +5,14 @@ const StyledDiv = styled.div<IDiv>`
   margin: ${(props) => props.margin || "0"};
   padding: ${(props) => props.padding || "0"};
   border: ${(props) => props.border || "none"};
+  ${(props) =>
+    props.justifyContent && `justify-content: ${props.justifyContent};`}
+  ${(props) => props.alignItems && `align-items: ${props.alignItems};`}
+  ${(props) => props.alignContent && `align-content: ${props.alignContent};`}
 `;
 
-const Div = ({ padding, margin, children, border }: IDiv) => {
-  return (
-    <StyledDiv padding={padding} margin={margin} border={border}>
-      {children}
-    </StyledDiv>
-  );
+const Div = ({ children, ...props }: IDiv) => {
+  return <StyledDiv {...props}>{children}</StyledDiv>;
 };
 
 export default Div;

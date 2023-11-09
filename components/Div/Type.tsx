@@ -3,4 +3,7 @@ export interface IDiv {
   margin?: string;
   children?: React.ReactNode;
   border?: string;
+  justifyContent?: string;
+  alignItems?: string;
+  alignContent?: string;
 }
