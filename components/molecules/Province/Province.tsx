@@ -2,6 +2,7 @@ import { IProvince } from "./Type";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Div from "../../atoms/Div";
+import { CountryUtils } from "../../../utils";
 
 const Wrapper = styled(Div)`
   display: grid;
@@ -23,7 +24,7 @@ const Province = ({
         {ic}
       </Text>
       <Text>{name}</Text>
-      <Text>{owner}</Text>
+      <Text>{CountryUtils.getCountryName(owner)}</Text>
     </Wrapper>
   );
 };
