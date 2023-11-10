@@ -34,7 +34,11 @@ class CountryUtils {
     }
   }
 
-  static getCountryFlagFilePath(country: Country): React.ReactNode | null {
+  static getCountryFlagFilePath(
+    country: Country,
+    height?: number,
+    width?: number
+  ): React.ReactNode | null {
     let svg;
     switch (country) {
       case Country.GERMANY:
@@ -70,8 +74,8 @@ class CountryUtils {
         <Image
           src={svg}
           alt={CountryUtils.getCountryName(country)}
-          width={30}
-          height={30}
+          width={width || 30}
+          height={height || 30}
         />
       )
     );

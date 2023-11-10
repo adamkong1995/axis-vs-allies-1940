@@ -20,6 +20,17 @@ type Story = StoryObj<typeof meta>;
 export const EasternUS: Story = {
   args: {
     owner: Country.USA,
+    currentOwner: Country.USA,
+    ic: 20,
+    name: "Eastern US",
+    id: "10",
+  },
+};
+
+export const OccupiedEasternUS: Story = {
+  args: {
+    owner: Country.USA,
+    currentOwner: Country.GERMANY,
     ic: 20,
     name: "Eastern US",
     id: "10",
