@@ -3,15 +3,32 @@ const path = require("path");
 
 // Retrieve command-line arguments
 const args = process.argv.slice(2);
-
+console.log("args", args);
 if (args.length === 0) {
   console.error("Please provide a file name as an argument.");
   process.exit(1);
 }
 
 // Extract the provided file name
-const folderName = args[0];
-const componentName = args[0];
+const componentType = args[0];
+
+if (!componentType.match(/^a$|^m$|^o$/)) {
+  console.error("Please provide a or m or o as an argument.");
+  process.exit(1);
+}
+
+let componentTypeName = "";
+switch (componentType) {
+  case "a":
+    componentTypeName = "atoms";
+  case "m":
+    componentTypeName = "molecules";
+  case "o":
+    componentTypeName = "organisms";
+}
+
+const folderName = args[1];
+const componentName = args[1];
 const fileExtension = "tsx"; // You can customize the file extension here
 
 // Define the directory where you want to create files
@@ -23,7 +40,7 @@ fs.ensureDirSync(targetDirectory);
 // Create the component file inside the folder
 const ComponentFilePath = path.join(
   targetDirectory,
-  `${componentName}.${fileExtension}`
+  `${componentTypeName}/${componentName}.${fileExtension}`
 );
 fs.writeFileSync(
   ComponentFilePath,
@@ -42,7 +59,10 @@ export default ${componentName};
 );
 
 // Create the Type file inside the folder
-const TypeFilePath = path.join(targetDirectory, `Type.${fileExtension}`);
+const TypeFilePath = path.join(
+  targetDirectory,
+  `${componentTypeName}/Type.${fileExtension}`
+);
 
 fs.writeFileSync(
   TypeFilePath,
@@ -54,7 +74,10 @@ export interface I${componentName} {
 );
 
 // Create the story file inside the folder
-const StoryFilePath = path.join(targetDirectory, `${componentName}.stories.ts`);
+const StoryFilePath = path.join(
+  targetDirectory,
+  `${componentTypeName}/${componentName}.stories.ts`
+);
 fs.writeFileSync(
   StoryFilePath,
   `
@@ -86,7 +109,10 @@ export const Primary: Story = {
 
 // Create the index.ts file inside the folder
 
-const IndexFilePath = path.join(targetDirectory, "index.ts");
+const IndexFilePath = path.join(
+  targetDirectory,
+  "${componentTypeName}/index.ts"
+);
 fs.writeFileSync(
   IndexFilePath,
   `
