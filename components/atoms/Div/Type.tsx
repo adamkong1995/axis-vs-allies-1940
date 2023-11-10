@@ -1,9 +1,11 @@
 export interface IDiv {
   padding?: string;
   margin?: string;
-  children?: React.ReactNode;
+  backgroundColor?: string;
   border?: string;
+  borderRadius?: string;
   justifyContent?: string;
   alignItems?: string;
   alignContent?: string;
+  children?: React.ReactNode;
 }

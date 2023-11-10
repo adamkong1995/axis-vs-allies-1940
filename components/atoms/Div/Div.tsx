@@ -6,6 +6,9 @@ const StyledDiv = styled.div<IDiv>`
   padding: ${(props) => props.padding || "0"};
   border: ${(props) => props.border || "none"};
   ${(props) =>
+    props.backgroundColor && `background-color: ${props.backgroundColor};`};
+  ${(props) => props.borderRadius && `border-radius: ${props.borderRadius};`}
+  ${(props) =>
     props.justifyContent && `justify-content: ${props.justifyContent};`}
   ${(props) => props.alignItems && `align-items: ${props.alignItems};`}
   ${(props) => props.alignContent && `align-content: ${props.alignContent};`}
