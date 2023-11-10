@@ -31,6 +31,7 @@ const Province = ({
         </Text>
         <Text>{name}</Text>
         <Text>{CountryUtils.getCountryName(owner)}</Text>
+        {CountryUtils.getCountryFlagFilePath(owner)}
       </Wrapper>
     </Node>
   );
