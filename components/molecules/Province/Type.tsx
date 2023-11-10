@@ -1,10 +1,9 @@
 import { Country } from "../../Types/Country";
+import { INode } from "../../atoms/Node";
 
-export interface IProvince {
+export interface IProvince extends INode {
   owner: Country;
   currentOwner?: Country;
-  name?: string;
-  id: string;
   isCapital?: boolean;
   ic?: number;
 }

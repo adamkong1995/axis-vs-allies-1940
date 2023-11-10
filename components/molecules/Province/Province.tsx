@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Div from "../../atoms/Div";
 import { CountryUtils } from "../../../utils";
+import Node from "../../atoms/Node";
 
 const Wrapper = styled(Div)`
   display: grid;
@@ -19,13 +20,19 @@ const Province = ({
   ic,
 }: IProvince) => {
   return (
-    <Wrapper border="1px solid #000000" backgroundColor="#6c6a6a" padding="5px">
-      <Text border="2px solid #ffffff" borderRadius="50%" padding="2px">
-        {ic}
-      </Text>
-      <Text>{name}</Text>
-      <Text>{CountryUtils.getCountryName(owner)}</Text>
-    </Wrapper>
+    <Node id={id} name={name}>
+      <Wrapper
+        border="1px solid #000000"
+        backgroundColor="#6c6a6a"
+        padding="5px"
+      >
+        <Text border="2px solid #ffffff" borderRadius="50%" padding="2px">
+          {ic}
+        </Text>
+        <Text>{name}</Text>
+        <Text>{CountryUtils.getCountryName(owner)}</Text>
+      </Wrapper>
+    </Node>
   );
 };
 
