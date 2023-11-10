@@ -21,10 +21,13 @@ let componentTypeName = "";
 switch (componentType) {
   case "a":
     componentTypeName = "atoms";
+    break;
   case "m":
     componentTypeName = "molecules";
+    break;
   case "o":
     componentTypeName = "organisms";
+    break;
 }
 
 const folderName = args[1];
@@ -32,7 +35,11 @@ const componentName = args[1];
 const fileExtension = "tsx"; // You can customize the file extension here
 
 // Define the directory where you want to create files
-const targetDirectory = path.resolve(__dirname, "../components", folderName);
+const targetDirectory = path.resolve(
+  __dirname,
+  `../components/${componentTypeName}`,
+  folderName
+);
 
 // Create the target directory if it doesn't exist
 fs.ensureDirSync(targetDirectory);
@@ -40,7 +47,7 @@ fs.ensureDirSync(targetDirectory);
 // Create the component file inside the folder
 const ComponentFilePath = path.join(
   targetDirectory,
-  `${componentTypeName}/${componentName}.${fileExtension}`
+  `${componentName}.${fileExtension}`
 );
 fs.writeFileSync(
   ComponentFilePath,
@@ -59,10 +66,7 @@ export default ${componentName};
 );
 
 // Create the Type file inside the folder
-const TypeFilePath = path.join(
-  targetDirectory,
-  `${componentTypeName}/Type.${fileExtension}`
-);
+const TypeFilePath = path.join(targetDirectory, `Type.${fileExtension}`);
 
 fs.writeFileSync(
   TypeFilePath,
@@ -74,10 +78,7 @@ export interface I${componentName} {
 );
 
 // Create the story file inside the folder
-const StoryFilePath = path.join(
-  targetDirectory,
-  `${componentTypeName}/${componentName}.stories.ts`
-);
+const StoryFilePath = path.join(targetDirectory, `${componentName}.stories.ts`);
 fs.writeFileSync(
   StoryFilePath,
   `
@@ -86,7 +87,7 @@ import ${componentName} from "./${componentName}";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
-  title: "Components/${componentName}",
+  title: "Components/${componentTypeName}/${componentName}",
   component: ${componentName},
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
@@ -109,10 +110,7 @@ export const Primary: Story = {
 
 // Create the index.ts file inside the folder
 
-const IndexFilePath = path.join(
-  targetDirectory,
-  "${componentTypeName}/index.ts"
-);
+const IndexFilePath = path.join(targetDirectory, "index.ts");
 fs.writeFileSync(
   IndexFilePath,
   `
